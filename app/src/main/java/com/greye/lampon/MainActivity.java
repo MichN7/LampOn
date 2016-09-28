@@ -18,11 +18,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         socialImage = (ImageView) findViewById(R.id.imageView2);
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         ImageView imageView2 = (ImageView) findViewById(R.id.imageView2);
-        ImageView imageView3 = (ImageView) findViewById(R.id.imageView3);
 
         imageView.setOnClickListener(this);
         imageView2.setOnClickListener(this);
-        imageView3.setOnClickListener(this);
 
     }
 
@@ -38,10 +36,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent intentSocial = new Intent(getApplicationContext(),SocialActivity.class);
                 startActivity(intentSocial);
                 break;
-            case R.id.imageView3:
-                Intent intentEvent = new Intent(getApplicationContext(),EventActivity.class);
-                startActivity(intentEvent);
-                break;
+            case R.id.imageViewFoco:
+                boolean bandera=false;
+                if(!bandera){
+                    //primera vez, esta apagado y pasará a encendido
+
+                    bandera=true;
+                }
+                else{
+                    //esta encendida, se busca apagar
+
+
+                    bandera = false;
+                }
         }
     }
 }
