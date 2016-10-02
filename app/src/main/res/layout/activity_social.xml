@@ -3,13 +3,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.twitter.sdk.android.core.identity.TwitterLoginButton
+        android:id="@+id/twitter_login_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="192dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
     <com.facebook.login.widget.LoginButton
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:layout_marginBottom="72dp"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:textSize="18sp"
+        android:layout_alignBottom="@+id/twitter_login_button"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp" />
+        android:paddingBottom="15dp" />
+
 
 </RelativeLayout>

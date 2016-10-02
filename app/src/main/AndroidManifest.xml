@@ -19,6 +19,10 @@
         </activity>
         <activity android:name=".SocialActivity"></activity>
         <activity android:name=".AlarmActivity"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="29e582d518f5bbc246d31dfcaf596a5724dc2bd4"
+            ></meta-data>
     </application>
 
 </manifest>
