@@ -2,10 +2,14 @@ package com.greye.lampon;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.telecom.Call;
 import android.util.Log;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -39,29 +43,12 @@ public class SocialActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social);
 
-        //Twitter
-        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
-        Fabric.with(this, new Twitter(authConfig));
+        setUpTwitterButton();
+        setUpFacebookButton();
 
-        loginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
-        loginButton.setCallback(new Callback<TwitterSession>() {
-            @Override
-            public void success(Result<TwitterSession> result) {
-                // The TwitterSession is also available through:
-                // Twitter.getInstance().core.getSessionManager().getActiveSession()
-                TwitterSession session = result.data;
-                // TODO: Remove toast and use the TwitterSession's userID
-                String msg = "Se ha conectado correctamente a Twitter! ";
-                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-                goMainScreen();
-            }
-            @Override
-            public void failure(TwitterException exception) {
-                Log.d("TwitterKit", "Login with Twitter failure", exception);
-            }
-        });
+    }
 
-
+    private void setUpFacebookButton(){
         //Facebook
         callbackManager = CallbackManager.Factory.create();
 
@@ -84,14 +71,38 @@ public class SocialActivity extends Activity{
                 Toast.makeText(getApplicationContext(),R.string.error_login, Toast.LENGTH_SHORT).show();
             }
         });
+    } //Inicializa el boton de Facebook
 
-    }
+    private void setUpTwitterButton(){
+        //Twitter
+        TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
+        Fabric.with(this, new Twitter(authConfig));
+
+        loginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
+        loginButton.setCallback(new Callback<TwitterSession>() {
+            @Override
+            public void success(Result<TwitterSession> result) {
+                // The TwitterSession is also available through:
+                // Twitter.getInstance().core.getSessionManager().getActiveSession()
+                    TwitterSession session = result.data;
+                    String msg = "Se ha conectado correctamente a Twitter! ";
+                    Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+                    goMainScreen();
+
+            }
+            @Override
+            public void failure(TwitterException exception) {
+                Log.d("TwitterKit", "Login with Twitter failure", exception);
+            }
+        });
+    } //Inicializa el boton de Twitter
+
 
     protected void goMainScreen(){
         Intent intent = new Intent(this,MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
-    }
+    } //Regresa a la pantalla principal
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
