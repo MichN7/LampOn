@@ -1,0 +1,74 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.greye.lampon.RepetirFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="266dp"
+        android:layout_height="287dp"
+        android:weightSum="1"
+        android:orientation="vertical">
+
+        <CheckBox
+            android:text="Domingo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="semana"
+            android:id="@+id/checkBox" />
+
+        <CheckBox
+            android:text="Lunes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="semana"
+            android:id="@+id/checkBox2" />
+
+        <CheckBox
+            android:text="Martes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="semana"
+            android:id="@+id/checkBox3" />
+
+        <CheckBox
+            android:text="Miércoles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="semana"
+            android:id="@+id/checkBox4" />
+
+        <CheckBox
+            android:text="Jueves"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="semana"
+            android:id="@+id/checkBox5" />
+
+        <CheckBox
+            android:text="Viernes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="semana"
+            android:id="@+id/checkBox6" />
+
+        <CheckBox
+            android:text="Sábado"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="semana"
+            android:id="@+id/checkBox7" />
+
+        <Button
+            android:text="Guardar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="save"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/btnGuardar" />
+
+    </LinearLayout>
+</FrameLayout>
