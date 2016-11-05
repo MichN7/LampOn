@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.Button;
 
-public class HourActivity2 extends AppCompatActivity implements View.OnClickListener {
+public class HourActivity2 extends AppCompatActivity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,21 +28,29 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
         Button Guardar = (Button) findViewById(R.id.btnGuardar);
         Guardar.setOnClickListener(this);
     }
-
+    FragmentManager fm = getSupportFragmentManager();
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnRepetir){
-            try{
-            Intent Repitir = new Intent(HourActivity2.this, RepetirFragment.class);
-            startActivity(Repitir);}
+            try {
+
+                DFragment dFragment = new DFragment();
+                // Show DialogFragment
+                dFragment.show(fm, "Dialog Fragment");
+            }
             catch (Exception e){
                 Log.e(null,"error");
             }
         }
         if (v.getId() == R.id.btnAplazar){
-
-            Intent Aplazar = new Intent(HourActivity2.this, AplazarActivity.class);
-            startActivity(Aplazar);
+            try {
+                DFragmentDesplazar dFragmentDs = new DFragmentDesplazar();
+                // Show DialogFragment
+                dFragmentDs.show(fm, "Dialog Fragment");
+            }
+            catch (Exception e){
+                Log.e(null,"error");
+            }
         }
         if (v.getId() == R.id.btnCancelar){
             finish();
