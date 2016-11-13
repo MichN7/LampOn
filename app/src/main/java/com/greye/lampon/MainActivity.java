@@ -1,5 +1,7 @@
 package com.greye.lampon;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,7 +25,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imageView2.setOnClickListener(this);
 
     }
-
 
     @Override
     public void onClick(View v) {
