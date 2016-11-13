@@ -24,6 +24,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <receiver android:name=".Alarm_Receiver"/>
         <activity android:name=".SocialActivity" />
         <activity android:name=".AlarmActivity" />
 
@@ -32,8 +34,21 @@
             android:value="29e582d518f5bbc246d31dfcaf596a5724dc2bd4" />
 
         <activity android:name=".HourActivity2" />
-        <activity android:name=".Repetir" />
+
         <activity android:name=".AplazarActivity"></activity>
+        <receiver android:name=".Alarm_Receiver"/>
+
+        <service android:name="RingTonePlayingService"
+            android:enabled="true" >
+
+        </service>
+
+
+        <!-- ATTENTION: This was auto-generated to add Google Play services to your project for
+     App Indexing.  See https://g.co/AppIndexing/AndroidStudio for more information. -->
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

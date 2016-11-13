@@ -18,7 +18,9 @@
         android:id="@+id/btnCancelar"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/btnPararAlarma"
+        android:layout_toEndOf="@+id/btnPararAlarma" />
 
     <Button
         android:text="GUARDAR"
@@ -26,7 +28,9 @@
         android:layout_height="50dp"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:id="@+id/btnGuardar"
-        android:layout_alignParentTop="true"/>
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/btnPararAlarma"
+        android:layout_toStartOf="@+id/btnPararAlarma" />
 
     <Button
         android:text="Repetir"
@@ -62,14 +66,25 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <TextView
-        android:text="Nombre de la Alarma"
-        android:layout_width="350dp"
-        android:layout_height="50dp"
-        android:id="@+id/txtNombre"
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:text="Descripcion "
+        android:ems="10"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/btnRepetir" />
+        android:layout_marginLeft="14dp"
+        android:layout_marginStart="14dp"
+        android:id="@+id/editText" />
+
+    <Button
+        android:text="Parar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnPararAlarma"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

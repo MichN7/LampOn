@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.greye.lampon.DFragment">
+    tools:context="com.greye.lampon.HourActivity2">
 
     <LinearLayout
         android:orientation="vertical"
@@ -10,6 +10,9 @@
         android:layout_height="225dp"
         android:weightSum="1">
 
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <RadioButton
             android:text="3 minutos"
             android:layout_width="match_parent"
@@ -40,14 +43,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/Rbtn4" />
 
+
         <Button
             android:text="Guardar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="save"
             style="@style/Widget.AppCompat.Button.Borderless"
-            android:id="@+id/btnGuardar" />
-
+            android:id="@+id/btnGuardarDezplazar" />
+        </RadioGroup>
     </LinearLayout>
 
 </FrameLayout>
