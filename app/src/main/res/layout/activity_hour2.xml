@@ -32,32 +32,6 @@
         android:layout_toLeftOf="@+id/btnPararAlarma"
         android:layout_toStartOf="@+id/btnPararAlarma" />
 
-    <Button
-        android:text="Repetir"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnRepetir"
-        android:elevation="0dp"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_below="@+id/tpHora"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/btnGuardar"
-        android:layout_alignEnd="@+id/btnGuardar" />
-
-    <Button
-        android:text="Aplazar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnAplazar"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_alignBaseline="@+id/btnRepetir"
-        android:layout_alignBottom="@+id/btnRepetir"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/btnRepetir"
-        android:layout_toEndOf="@+id/btnRepetir" />
-
     <TimePicker
         android:layout_width="350dp"
         android:layout_height="340dp"
@@ -80,11 +54,37 @@
         android:id="@+id/editText" />
 
     <Button
+        android:text="Aplazar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAplazar"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_alignBaseline="@+id/btnRepetir"
+        android:layout_alignBottom="@+id/btnRepetir"
+        android:layout_alignRight="@+id/tpHora"
+        android:layout_alignEnd="@+id/tpHora"
+        android:layout_marginRight="13dp"
+        android:layout_marginEnd="13dp" />
+
+    <Button
+        android:text="Repetir"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnRepetir"
+        android:elevation="0dp"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_below="@+id/tpHora"
+        android:layout_toLeftOf="@+id/btnPararAlarma"
+        android:layout_toStartOf="@+id/btnPararAlarma"
+        android:layout_marginRight="13dp"
+        android:layout_marginEnd="13dp" />
+
+    <Button
         android:text="Parar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/btnPararAlarma"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/tpHora"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

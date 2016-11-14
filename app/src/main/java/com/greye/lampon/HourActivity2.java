@@ -3,11 +3,13 @@ package com.greye.lampon;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,6 +41,7 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
     PendingIntent pending_intent;
     Intent mi_intent;
     Calendar cal;
+    boolean ban;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -54,6 +57,7 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_hour2);
         final Calendar cal = Calendar.getInstance();
         this.context = this;
+        ban = false;
 
         Button Repetir = (Button) findViewById(R.id.btnRepetir);
         Repetir.setOnClickListener(this);
@@ -65,7 +69,6 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
         Cancelar.setOnClickListener(this);
 
         Button btnGuardar = (Button) findViewById(R.id.btnGuardar);
-        Button btnPararAlarma = (Button) findViewById(R.id.btnPararAlarma);
 
         alarm_Manager = (AlarmManager) getSystemService(ALARM_SERVICE);
         //se inicializa el timepiker
@@ -73,34 +76,47 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
 
         final Intent mi_intent = new Intent(this.context, Alarm_Receiver.class);
 
-        btnGuardar.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.M)
+
+          btnGuardar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!ban) {
+                    Log.e("dentro del OnClick", "que entro al btG ");
+
+                    cal.set(Calendar.HOUR_OF_DAY, alarm_timepicker.getCurrentHour());
+                    cal.set(Calendar.MINUTE, alarm_timepicker.getCurrentMinute());
+
+                    int hora = alarm_timepicker.getCurrentHour();
+                    int minutos = alarm_timepicker.getCurrentMinute();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(HourActivity2.this);
+                    builder.setTitle("Modify Customer Details");
+
+                    String hora_string = String.valueOf(hora);
+                    String minutos_string = String.valueOf(minutos);
+                    confirm(hora_string, minutos_string);
+                    pending_intent = PendingIntent.getBroadcast(HourActivity2.this, 0, mi_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                    alarm_Manager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pending_intent);
+                    ban = true;
+                }
+
+             //   mi_intent.putExtra("extra","alarm_on");
+
+            }
+
+        });
+        Button btnParar = (Button) findViewById(R.id.btnPararAlarma);
+
+
+        btnParar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                alarm_Manager.cancel(pending_intent);
+                 sendBroadcast(mi_intent);
 
-                cal.set(Calendar.HOUR_OF_DAY, alarm_timepicker.getCurrentHour());
-                cal.set(Calendar.MINUTE, alarm_timepicker.getCurrentMinute());
-
-                pending_intent = PendingIntent.getBroadcast(HourActivity2.this, 0, mi_intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                alarm_Manager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pending_intent);
-
-                mi_intent.putExtra("extra","alarm_on");
-
+                Log.e("En boton pararAlarma", "paro el broadcast");
             }
         });
-/*
-        btnPararAlarma.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                    alarm_Manager.cancel(pending_intent);
-                    mi_intent.putExtra("extra","alarm_off");
-                    sendBroadcast(mi_intent);
-
-
-            }
-        });
-        */
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -113,6 +129,8 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onClick(View v) {
+
+
         if (v.getId() == R.id.btnRepetir) {
             try {
 
@@ -123,6 +141,7 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
                 Log.e(null, "error");
             }
         }
+
         if (v.getId() == R.id.btnAplazar) {
             try {
                 DFragmentDesplazar dFragmentDs = new DFragmentDesplazar();
@@ -133,13 +152,13 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
             }
         }
         if (v.getId() == R.id.btnCancelar) {
-            alarm_Manager.cancel(pending_intent);
-            sendBroadcast(mi_intent);
             finish();
+
         }
 
 
         if (v.getId() == R.id.btnGuardarRepetir) {
+            // checkBox para
             CheckBox cb1 = (CheckBox) findViewById(R.id.checkBox);
             CheckBox cb2 = (CheckBox) findViewById(R.id.checkBox2);
             CheckBox cb3 = (CheckBox) findViewById(R.id.checkBox3);
@@ -166,8 +185,9 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
                 cal.set(Calendar.DAY_OF_WEEK, 8);
             }
 
-
+        }
             if (v.getId() == R.id.btnGuardarDezplazar) {
+
                 RadioButton Rbtn = (RadioButton) findViewById(R.id.Rbtn);
                 RadioButton Rbtn1 = (RadioButton) findViewById(R.id.Rbtn1);
                 RadioButton Rbtn2 = (RadioButton) findViewById(R.id.Rbtn2);
@@ -176,6 +196,9 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
 
                 if (Rbtn.isChecked()) {
                     Aplazar = 3;
+
+
+                    alarm_Manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + Aplazar * 1000, pending_intent);
                 } else if (Rbtn1.isChecked()) {
                     Aplazar = 5;
                 } else if (Rbtn2.isChecked()) {
@@ -189,7 +212,7 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
             }
 
         }
-    }
+
 
 
     /**
@@ -226,5 +249,37 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
+    }
+
+    public void confirm(String hora,String minutos) {
+
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+
+        // set title
+
+        alertDialogBuilder.setTitle("Alarma");
+        // set dialog message
+        alertDialogBuilder
+                .setMessage("La alamar se activara a las "+hora+":"+minutos)
+                .setCancelable(false)
+                .setPositiveButton("OK",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // if this button is clicked, close
+                        // current activity
+                        HourActivity2.this.finish();
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        // if this button is clicked, just close
+                        // the dialog box and do nothing
+                        dialog.cancel();
+                    }
+                });
+
+        // create alert dialog
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        // show it
+        alertDialog.show();
     }
 }

@@ -13,7 +13,7 @@ public class Alarm_Receiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Log.e("esto es la clase Alarm","que pedo locos");
+        Log.e("esto es la clase Alarm","que ");
 
 
         Intent service_intent = new Intent(context,RingTonePlayingService.class);
