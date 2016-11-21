@@ -17,6 +17,7 @@ import android.widget.Toast;
 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class NotificationService extends NotificationListenerService {
     Context context;
+    MainActivity main=new MainActivity();
 
     @Override
 
@@ -33,6 +34,7 @@ public class NotificationService extends NotificationListenerService {
         Intent i = new Intent();
         i.setAction("com.greye.lampon.NOTIFICATION_POSTED_RECEIVER");
         sendBroadcast(i);
+       main.sendData("2");
         //Aqui se envia datos al arduino --->> 1
     }
 
@@ -43,5 +45,6 @@ public class NotificationService extends NotificationListenerService {
         i.setAction("com.greye.lampon.NOTIFICATION_POSTED_RECEIVER");
         sendBroadcast(i);
         //Aqui se envia datos al arduino --->> 0
+       main.sendData("3");
     }
 }
