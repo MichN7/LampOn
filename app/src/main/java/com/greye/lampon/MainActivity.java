@@ -66,19 +66,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             btSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
         }   catch (IOException e) {
-            errorExit("Fatal Error", "In onResume() and socket create failed: " + e.getMessage() + ".");
+            errorExit("Fatal Error", "In onResume() falló creacion del socket " + e.getMessage() + ".");
         }
         btAdapter.cancelDiscovery();
 
         Log.d(TAG, "...Connecting to Remote...");
         try{
             btSocket.connect();
-            Log.d(TAG, "...Connection established and data link opened...");
+            Log.d(TAG, "...concetando socket..");
         } catch (IOException e) {
             try{
                 btSocket.close();
             } catch (IOException e2) {
-                errorExit("Fatal Error", "In onResume() and unable to close socket during connection failure" + e2.getMessage() + ".");
+                errorExit("Fatal Error", " onResume() fallo conexion de sokcet" + e2.getMessage() + ".");
             }
         }
         Log.d(TAG, "...Creating Socket...");
@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             outStream = btSocket.getOutputStream();
         } catch (IOException e) {
-            errorExit("Fatal Error", "In onResume() and output stream creation failed : " + e.getMessage() + ".");
+            errorExit("Fatal Error", "In onResume() fallo en la ceracion de outputStream: " + e.getMessage() + ".");
         }
 
     }
@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } catch (IOException e) {
             String msg = "In onResume() ocurrio una excepcion al escribir dato " + e.getMessage();
             if (address.equals("00:00:00:00:00:00"))
-                msg = msg + ".\n\nUpdate your server address from 00:00:00:00:00:00 to the address on line 36 in the java code";
+                msg = msg + ".\n\nfallo direccion del dispositivo esclavo";
             msg = msg + ".\n\nCheck that the SPP UUID: " + MY_UUID.toString() + "exists on server.\n\n";
 
             errorExit("Fatal Error", msg);
