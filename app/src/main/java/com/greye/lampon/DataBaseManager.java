@@ -1,5 +1,8 @@
 package com.greye.lampon;
 
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+
 /**
  * Created by emmanuelgarcia on 08/11/16.
  */
@@ -25,5 +28,12 @@ public class DataBaseManager {
             +Alarma_Aplazamiento+" DATE not null, "
             +Alarma_IdDias+" integer not null, " +
             "FOREIGN KEY ("+Alarma_IdDias+") REFERENCES " +TABLE_DIAS+" ("+Dias_ID+")); ";
+    private  DbHelper helper;
+    private SQLiteDatabase db;
+
+    public DataBaseManager(Context contex){
+       helper = new DbHelper(contex);
+        db = helper.getWritableDatabase();
+    }
 
 }

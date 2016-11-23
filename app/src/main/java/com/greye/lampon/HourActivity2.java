@@ -1,6 +1,8 @@
 package com.greye.lampon;
 
 import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,6 +11,8 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +34,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import java.util.Calendar;
 
 
+@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
 public class HourActivity2 extends AppCompatActivity implements View.OnClickListener {
 
 
@@ -62,9 +67,6 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
         Button Repetir = (Button) findViewById(R.id.btnRepetir);
         Repetir.setOnClickListener(this);
 
-        Button Aplazar = (Button) findViewById(R.id.btnAplazar);
-        Aplazar.setOnClickListener(this);
-
         Button Cancelar = (Button) findViewById(R.id.btnCancelar);
         Cancelar.setOnClickListener(this);
 
@@ -83,6 +85,8 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
                 if(!ban) {
                     Log.e("dentro del OnClick", "que entro al btG ");
 
+
+
                     cal.set(Calendar.HOUR_OF_DAY, alarm_timepicker.getCurrentHour());
                     cal.set(Calendar.MINUTE, alarm_timepicker.getCurrentMinute());
 
@@ -93,10 +97,14 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
 
                     String hora_string = String.valueOf(hora);
                     String minutos_string = String.valueOf(minutos);
-                    confirm(hora_string, minutos_string);
+                    Toast.makeText(getApplicationContext(),"La alamar se activara a las"+hora_string+":"+minutos_string,Toast.LENGTH_SHORT).show();
+
+                    mi_intent.putExtra("extra","alarm_on");
+
                     pending_intent = PendingIntent.getBroadcast(HourActivity2.this, 0, mi_intent, PendingIntent.FLAG_UPDATE_CURRENT);
                     alarm_Manager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pending_intent);
                     ban = true;
+
                 }
 
              //   mi_intent.putExtra("extra","alarm_on");
@@ -104,24 +112,13 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
             }
 
         });
-        Button btnParar = (Button) findViewById(R.id.btnPararAlarma);
 
-
-        btnParar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                alarm_Manager.cancel(pending_intent);
-                 sendBroadcast(mi_intent);
-
-                Log.e("En boton pararAlarma", "paro el broadcast");
-            }
-        });
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
+
 
 
     FragmentManager fm = getSupportFragmentManager();
@@ -142,15 +139,7 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
             }
         }
 
-        if (v.getId() == R.id.btnAplazar) {
-            try {
-                DFragmentDesplazar dFragmentDs = new DFragmentDesplazar();
-                // Show DialogFragment
-                dFragmentDs.show(fm, "Dialog Fragment");
-            } catch (Exception e) {
-                Log.e(null, "error");
-            }
-        }
+
         if (v.getId() == R.id.btnCancelar) {
             finish();
 
@@ -186,30 +175,7 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
             }
 
         }
-            if (v.getId() == R.id.btnGuardarDezplazar) {
 
-                RadioButton Rbtn = (RadioButton) findViewById(R.id.Rbtn);
-                RadioButton Rbtn1 = (RadioButton) findViewById(R.id.Rbtn1);
-                RadioButton Rbtn2 = (RadioButton) findViewById(R.id.Rbtn2);
-                RadioButton Rbtn3 = (RadioButton) findViewById(R.id.Rbtn3);
-                RadioButton Rbtn4 = (RadioButton) findViewById(R.id.Rbtn4);
-
-                if (Rbtn.isChecked()) {
-                    Aplazar = 3;
-
-
-                    alarm_Manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + Aplazar * 1000, pending_intent);
-                } else if (Rbtn1.isChecked()) {
-                    Aplazar = 5;
-                } else if (Rbtn2.isChecked()) {
-                    Aplazar = 10;
-                } else if (Rbtn3.isChecked()) {
-                    Aplazar = 15;
-                } else if (Rbtn4.isChecked()) {
-                    Aplazar = 30;
-                }
-
-            }
 
         }
 
@@ -251,35 +217,5 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
         client.disconnect();
     }
 
-    public void confirm(String hora,String minutos) {
 
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-
-        // set title
-
-        alertDialogBuilder.setTitle("Alarma");
-        // set dialog message
-        alertDialogBuilder
-                .setMessage("La alamar se activara a las "+hora+":"+minutos)
-                .setCancelable(false)
-                .setPositiveButton("OK",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        // if this button is clicked, close
-                        // current activity
-                        HourActivity2.this.finish();
-                    }
-                })
-                .setNegativeButton("No",new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog,int id) {
-                        // if this button is clicked, just close
-                        // the dialog box and do nothing
-                        dialog.cancel();
-                    }
-                });
-
-        // create alert dialog
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        // show it
-        alertDialog.show();
-    }
 }

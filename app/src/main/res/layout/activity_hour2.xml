@@ -18,9 +18,7 @@
         android:id="@+id/btnCancelar"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/btnPararAlarma"
-        android:layout_toEndOf="@+id/btnPararAlarma" />
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:text="GUARDAR"
@@ -29,8 +27,7 @@
         style="@style/Widget.AppCompat.Button.Borderless"
         android:id="@+id/btnGuardar"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/btnPararAlarma"
-        android:layout_toStartOf="@+id/btnPararAlarma" />
+        />
 
     <TimePicker
         android:layout_width="350dp"
@@ -54,36 +51,12 @@
         android:id="@+id/editText" />
 
     <Button
-        android:text="Aplazar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnAplazar"
-        style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_alignBaseline="@+id/btnRepetir"
-        android:layout_alignBottom="@+id/btnRepetir"
-        android:layout_alignRight="@+id/tpHora"
-        android:layout_alignEnd="@+id/tpHora"
-        android:layout_marginRight="13dp"
-        android:layout_marginEnd="13dp" />
-
-    <Button
         android:text="Repetir"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:id="@+id/btnRepetir"
         android:elevation="0dp"
         style="@style/Widget.AppCompat.Button.Borderless"
-        android:layout_below="@+id/tpHora"
-        android:layout_toLeftOf="@+id/btnPararAlarma"
-        android:layout_toStartOf="@+id/btnPararAlarma"
-        android:layout_marginRight="13dp"
-        android:layout_marginEnd="13dp" />
-
-    <Button
-        android:text="Parar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnPararAlarma"
         android:layout_below="@+id/tpHora"
         android:layout_centerHorizontal="true" />
 

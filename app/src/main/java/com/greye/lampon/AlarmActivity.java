@@ -24,6 +24,7 @@ public class AlarmActivity extends Activity implements View.OnClickListener {
             }
         });
 
+        DataBaseManager manger = new DataBaseManager(this);
     }
 
     @Override

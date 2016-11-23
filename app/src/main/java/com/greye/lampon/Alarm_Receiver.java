@@ -13,10 +13,13 @@ public class Alarm_Receiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Log.e("esto es la clase Alarm","que ");
 
 
+        String toma_string = intent.getExtras().getString("extra");
+        Log.e("la llave es",toma_string);
         Intent service_intent = new Intent(context,RingTonePlayingService.class);
+
+        service_intent.putExtra("extra",toma_string);
 
                 //Se inicia el servicio de ringtone
         context.startService(service_intent);
