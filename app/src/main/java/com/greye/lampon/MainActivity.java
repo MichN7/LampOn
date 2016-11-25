@@ -5,7 +5,9 @@ import android.bluetooth.BluetoothSocket;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Handler;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-
+        LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("Msg"));
         socialImage = (ImageView) findViewById(R.id.imageView2);
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         ImageView imageView2 = (ImageView) findViewById(R.id.imageView2);
@@ -182,4 +184,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             errorExit("Fatal Error", msg);
         }
     }
+
+    private BroadcastReceiver onNotice= new BroadcastReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String pack = intent.getStringExtra("package");
+            sendData("2");
+            Toast.makeText(getBaseContext(), "llego al onNotice :package = " + pack, Toast.LENGTH_SHORT).show();
+
+        }
+    };
 }
