@@ -33,6 +33,14 @@ public class DFragmentDesplazar extends DialogFragment{
         alarm_Manager = (AlarmManager)getActivity().getSystemService(ALARM_SERVICE);
         final Intent mi_intent = new Intent(getActivity(), Alarm_Receiver.class);
         radio = (RadioGroup) rootView.findViewById(R.id.RadioGroup);
+        Button Desplazar = (Button) rootView.findViewById(R.id.btnGuardarDezplazar);
+
+        final RadioButton Rbtn0 = (RadioButton) rootView.findViewById(R.id.Rbtn0);
+        final RadioButton Rbtn = (RadioButton) rootView.findViewById(R.id.Rbtn);
+        final RadioButton Rbtn1 = (RadioButton) rootView.findViewById(R.id.Rbtn1);
+        final RadioButton Rbtn2 = (RadioButton) rootView.findViewById(R.id.Rbtn2);
+        final RadioButton Rbtn3 = (RadioButton) rootView.findViewById(R.id.Rbtn3);
+        final RadioButton Rbtn4 = (RadioButton) rootView.findViewById(R.id.Rbtn4);
         Log.e("Entro a Clase Dfragment","2");
 
         radio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -123,14 +131,7 @@ public class DFragmentDesplazar extends DialogFragment{
                 }
             }
         });
-        Button Desplazar = (Button) rootView.findViewById(R.id.btnGuardarDezplazar);
 
-        final RadioButton Rbtn0 = (RadioButton) rootView.findViewById(R.id.Rbtn0);
-        final RadioButton Rbtn = (RadioButton) rootView.findViewById(R.id.Rbtn);
-        final RadioButton Rbtn1 = (RadioButton) rootView.findViewById(R.id.Rbtn1);
-        final RadioButton Rbtn2 = (RadioButton) rootView.findViewById(R.id.Rbtn2);
-        final RadioButton Rbtn3 = (RadioButton) rootView.findViewById(R.id.Rbtn3);
-        final RadioButton Rbtn4 = (RadioButton) rootView.findViewById(R.id.Rbtn4);
 
         Desplazar.setOnClickListener(new View.OnClickListener() {
             @Override

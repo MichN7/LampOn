@@ -52,12 +52,15 @@ public class RingTonePlayingService extends Service {
         switch (estado) {
             case "alarm_on":
                 startId = 1;
+
                 break;
             case "alarm_off":
                 startId = 0;
+
                 break;
             default:
                 startId = 0;
+
                 break;
         }
 
