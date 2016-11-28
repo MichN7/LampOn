@@ -57,12 +57,6 @@ public class PosponerAcivity extends AppCompatActivity implements View.OnClickLi
             @Override
             public void onClick(View v) {
 
-                RadioButton Rbtn0 = (RadioButton) findViewById(R.id.Rbtn0);
-                RadioButton Rbtn = (RadioButton) findViewById(R.id.Rbtn);
-                RadioButton Rbtn1 = (RadioButton) findViewById(R.id.Rbtn1);
-                RadioButton Rbtn2 = (RadioButton) findViewById(R.id.Rbtn2);
-                RadioButton Rbtn3 = (RadioButton) findViewById(R.id.Rbtn3);
-                RadioButton Rbtn4 = (RadioButton) findViewById(R.id.Rbtn4);
 
                 if (v.getId() == R.id.btnPosponer) {
 

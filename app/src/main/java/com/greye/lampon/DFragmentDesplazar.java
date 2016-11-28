@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,8 +61,9 @@ public class DFragmentDesplazar extends DialogFragment{
                     mi_intent.putExtra("extra", "alarm_on");
 
                     pending_intent = PendingIntent.getBroadcast(getActivity(), 0, mi_intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
                     alarm_Manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + Aplazar * 10000, pending_intent);
+
+                    returnToback();
 
                 } else if (checkedId == R.id.Rbtn0) {
                     alarm_Manager.cancel(pending_intent);
@@ -74,6 +76,7 @@ public class DFragmentDesplazar extends DialogFragment{
                     pending_intent = PendingIntent.getBroadcast(getActivity(), 0, mi_intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                     alarm_Manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + Aplazar * 10000, pending_intent);
+                    returnToback();
 
 
                 } else if (checkedId == R.id.Rbtn1) {
@@ -87,6 +90,7 @@ public class DFragmentDesplazar extends DialogFragment{
                     pending_intent = PendingIntent.getBroadcast(getActivity(), 0, mi_intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                     alarm_Manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + Aplazar * 10000, pending_intent);
+                    returnToback();
 
 
                 } else if (checkedId == R.id.Rbtn2) {
@@ -101,6 +105,7 @@ public class DFragmentDesplazar extends DialogFragment{
 
                     alarm_Manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + Aplazar * 10000, pending_intent);
 
+                    returnToback();
 
                 } else if (checkedId == R.id.Rbtn3) {
                     alarm_Manager.cancel(pending_intent);
@@ -113,6 +118,7 @@ public class DFragmentDesplazar extends DialogFragment{
                     pending_intent = PendingIntent.getBroadcast(getActivity(), 0, mi_intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                     alarm_Manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + Aplazar * 10000, pending_intent);
+                    returnToback();
 
 
                 } else if (checkedId == R.id.Rbtn4) {
@@ -126,6 +132,7 @@ public class DFragmentDesplazar extends DialogFragment{
                     pending_intent = PendingIntent.getBroadcast(getActivity(), 0, mi_intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
                     alarm_Manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + Aplazar * 10000, pending_intent);
+                    returnToback();
 
 
                 }
@@ -144,6 +151,11 @@ public class DFragmentDesplazar extends DialogFragment{
         });
         // Do something else
         return rootView;
+    }
+    public void returnToback() {
+
+        Intent intent = new Intent(getActivity(), PosponerAcivity.class);
+        startActivity(intent);
     }
 
 }
