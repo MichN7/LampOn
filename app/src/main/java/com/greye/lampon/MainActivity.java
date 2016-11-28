@@ -1,4 +1,5 @@
 package com.greye.lampon;
+
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -22,7 +23,11 @@ import java.util.Set;
 import java.util.UUID;
 
 
+
+
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
 
 
     boolean bandera=false;
@@ -38,10 +43,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static String address = "98:D3:31:90:8F:3B";
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("Msg"));
         socialImage = (ImageView) findViewById(R.id.imageView2);
@@ -114,6 +121,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             errorExit("Fatal Error","In onPause() fallo al cerrar el socket." + e2.getMessage() + ".");
         }
 
+
     }
 
 
@@ -134,9 +142,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     sendData("1");
                     Toast.makeText(getBaseContext(), "Encender el LED", Toast.LENGTH_SHORT).show();
                     bandera=true;
-                }
+               }
+
                 else{
                     //esta encendida, se busca apagar
+
                     sendData("0");
                     Toast.makeText(getBaseContext(), "Apagar el LED", Toast.LENGTH_SHORT).show();
                     bandera = false;
@@ -190,9 +200,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         public void onReceive(Context context, Intent intent) {
             String pack = intent.getStringExtra("package");
-            sendData("2");
+            if(intent.getStringExtra("command").equals("posted")){
+                sendData("2");
+            }else if(intent.getStringExtra("command").equals("removed")){
+                sendData("3");
+            }
             Toast.makeText(getBaseContext(), "llego al onNotice :package = " + pack, Toast.LENGTH_SHORT).show();
 
         }
     };
 }
+

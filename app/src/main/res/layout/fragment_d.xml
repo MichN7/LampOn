@@ -1,0 +1,62 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.greye.lampon.DFragmentDesplazar">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="225dp"
+        android:weightSum="1">
+
+        <RadioGroup
+            android:id="@+id/RadioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+         <RadioButton
+            android:text="1 minutos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Rbtn0" />
+        <RadioButton
+            android:text="3 minutos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Rbtn" />
+
+        <RadioButton
+            android:text="5 minutos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Rbtn1" />
+
+        <RadioButton
+            android:text="10 minutos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Rbtn2" />
+
+        <RadioButton
+            android:text="15 minutos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Rbtn3" />
+
+        <RadioButton
+            android:text="30 minutos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Rbtn4" />
+
+
+        <Button
+            android:text="Guardar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/btnGuardarDezplazar" />
+        </RadioGroup>
+    </LinearLayout>
+
+</FrameLayout>

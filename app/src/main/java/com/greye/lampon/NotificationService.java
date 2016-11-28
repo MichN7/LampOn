@@ -30,25 +30,25 @@ public class NotificationService extends NotificationListenerService {
     public void onNotificationPosted(StatusBarNotification sbn) {
         Log.d("Msg", "Hay una notificacion");
         String pack = sbn.getPackageName();
-      //  if (pack == "com.facebook.orca" || pack == "com.whatsapp") {
+        Log.d("Msg", pack);
+        if (pack.equals("com.facebook.orca")|| pack.equals("com.whatsapp")||pack.equals("com.greye.lampon")||pack.equals("com.facebook.katana")) {
             Intent msgrcv = new Intent("Msg");
             msgrcv.putExtra("package", pack);
-
-            Log.d("Msg", pack);
             msgrcv.putExtra("command", "posted");
             LocalBroadcastManager.getInstance(context).sendBroadcast(msgrcv);
-       // }
+        }
     }
 
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {
         Log.d("Msg","Se eliminó la notificacion");
         String pack = sbn.getPackageName();
-        Intent msgrcv = new Intent("Msg");
-        msgrcv.putExtra("package", pack);
-        msgrcv.putExtra("command","removed");
-        LocalBroadcastManager.getInstance(context).sendBroadcast(msgrcv);
-
+        if (pack.equals("com.facebook.orca")|| pack.equals("com.whatsapp")||pack.equals("com.greye.lampon")||pack.equals("com.facebook.katana")){
+            Intent msgrcv = new Intent("Msg");
+            msgrcv.putExtra("package", pack);
+            msgrcv.putExtra("command", "removed");
+            LocalBroadcastManager.getInstance(context).sendBroadcast(msgrcv);
+        }
     }
 
 
