@@ -31,7 +31,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Agrega una descripcion "
+            android:hint="Agrega una descripcion "
             android:id="@+id/editText"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="50dp" />

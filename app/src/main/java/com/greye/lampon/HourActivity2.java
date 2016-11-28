@@ -120,7 +120,7 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
 
                         }
                         else {
-                            Dias += ",Lunes ";
+                            Dias += ", Lunes";
 
                         }
 
@@ -134,7 +134,7 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
 
                         }
                         else {
-                            Dias += ", Martes ";
+                            Dias += ", Martes";
                             Log.e("String es : ","martes es el segundo");
 
                         }
@@ -145,7 +145,7 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
                             ban2=false;
                         }
                         else {
-                            Dias += ",Miercoles ";
+                            Dias += ", Miercoles";
 
                         }
                     }  if (cb4.isChecked()) {
@@ -155,7 +155,7 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
                             ban2=false;
                         }
                         else {
-                            Dias += ",Jueves ";
+                            Dias += ", Jueves";
                         }
                     } if (cb5.isChecked()) {
                         if(ban2) {
@@ -164,7 +164,7 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
                             ban2=false;
                         }
                         else {
-                            Dias += ",Viernes ";
+                            Dias += ", Viernes ";
 
                         }
 
@@ -175,7 +175,7 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
                             ban2=false;
                         }
                         else {
-                            Dias += ",Sabado ";
+                            Dias += ", Sabado";
 
 
                         }
@@ -186,7 +186,7 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
                             ban2=false;
                         }
                         else {
-                            Dias += ",Domingo ";
+                            Dias += ", Domingo";
                         }
                     }
                     Log.e("String es : ",Dias);
@@ -211,14 +211,14 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
                     pending_intent = PendingIntent.getBroadcast(HourActivity2.this, 0, mi_intent, PendingIntent.FLAG_UPDATE_CURRENT);
                     alarm_Manager.set(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), pending_intent);
                     ban = true;
-                    /*
+
                     //se mandan los valores a la DB
                     String titulo = et.getText().toString();
                     dbconeccion.insertarDatos(titulo,hora_string,Dias);
                     Intent main = new Intent(HourActivity2.this, AlarmActivity.class)
                             .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(main);
-                    */
+
                 }
 
 
