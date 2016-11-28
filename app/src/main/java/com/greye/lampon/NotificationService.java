@@ -28,19 +28,26 @@ public class NotificationService extends NotificationListenerService {
 
     @Override
     public void onNotificationPosted(StatusBarNotification sbn) {
-        Log.d("Msg","Hay una notificacion");
+        Log.d("Msg", "Hay una notificacion");
         String pack = sbn.getPackageName();
-        Intent msgrcv = new Intent("Msg");
-        msgrcv.putExtra("package", pack);
-        LocalBroadcastManager.getInstance(context).sendBroadcast(msgrcv);
+      //  if (pack == "com.facebook.orca" || pack == "com.whatsapp") {
+            Intent msgrcv = new Intent("Msg");
+            msgrcv.putExtra("package", pack);
+
+            Log.d("Msg", pack);
+            msgrcv.putExtra("command", "posted");
+            LocalBroadcastManager.getInstance(context).sendBroadcast(msgrcv);
+       // }
     }
 
     @Override
     public void onNotificationRemoved(StatusBarNotification sbn) {
         Log.d("Msg","Se eliminó la notificacion");
-        Intent i = new Intent();
-        i.setAction("com.greye.lampon.NOTIFICATION_POSTED_RECEIVER");
-        sendBroadcast(i);
+        String pack = sbn.getPackageName();
+        Intent msgrcv = new Intent("Msg");
+        msgrcv.putExtra("package", pack);
+        msgrcv.putExtra("command","removed");
+        LocalBroadcastManager.getInstance(context).sendBroadcast(msgrcv);
 
     }
 
