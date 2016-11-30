@@ -46,6 +46,7 @@ public class AlarmActivity extends ActionBarActivity {
             }
         });
 
+
         // Tomar los datos desde la base de datos para poner en el curso y después en el adapter
         Cursor cursor = dbconeccion.leerDatos();
 

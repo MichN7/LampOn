@@ -27,7 +27,10 @@
             android:layout_height="340dp"
             android:id="@+id/tpHora"
             android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:layout_alignParentStart="true"
+            android:background="#00fcfcfc"
+            android:headerBackground="#4083ff"
+            android:numbersSelectorColor="#40c3ff" />
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -127,7 +130,7 @@
         android:layout_height="50dp"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:id="@+id/btnGuardar"
-        android:background="@color/com_facebook_button_background_color_pressed" />
+        android:background="#4083ff" />
 
 
         <Button
@@ -136,7 +139,7 @@
             android:layout_height="50dp"
             style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/btnCancelar"
-            android:background="@color/com_facebook_button_background_color_pressed" />
+            android:background="#4083ff" />
 
     </LinearLayout>
 

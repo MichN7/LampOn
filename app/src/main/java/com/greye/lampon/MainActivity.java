@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     boolean bandera=false;
     ImageView socialImage;
-    ImageView foco;
+    ImageView imgfoco;
     private static final String TAG = "Bluetooth";
     private static final int REQUEST_ENABLE_BT = 1;
     private BluetoothAdapter btAdapter = null;
@@ -54,11 +54,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         socialImage = (ImageView) findViewById(R.id.imageView2);
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         ImageView imageView2 = (ImageView) findViewById(R.id.imageView2);
-        foco=(ImageView)findViewById(R.id.imageViewFoco);
+        imgfoco=(ImageView)findViewById(R.id.imageViewFoco);
 
         imageView.setOnClickListener(this);
         imageView2.setOnClickListener(this);
-        foco.setOnClickListener(this);
+        imgfoco.setOnClickListener(this);
 
         btAdapter = BluetoothAdapter.getDefaultAdapter();
         checkBTState();
@@ -142,6 +142,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     sendData("1");
                     Toast.makeText(getBaseContext(), "Encender el LED", Toast.LENGTH_SHORT).show();
                     bandera=true;
+
+                    imgfoco.setImageResource(R.drawable.focoicon);
                }
 
                 else{
@@ -150,6 +152,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     sendData("0");
                     Toast.makeText(getBaseContext(), "Apagar el LED", Toast.LENGTH_SHORT).show();
                     bandera = false;
+                    imgfoco.setImageResource(R.drawable.focooff);
+
                 }
         }
     }
