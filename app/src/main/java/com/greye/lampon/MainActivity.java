@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             btSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
         }   catch (IOException e) {
-            errorExit("Fatal Error", "In onResume() falló creacion del socket " + e.getMessage() + ".");
+            errorExit("Fatal Error", "Falló conexión con Light Up" + e.getMessage() + ".");
         }
         btAdapter.cancelDiscovery();
 
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             try{
                 btSocket.close();
             } catch (IOException e2) {
-                errorExit("Fatal Error", " onResume() fallo conexion de sokcet" + e2.getMessage() + ".");
+                errorExit("Fatal Error", "Falló conexión con Light Up" + e2.getMessage() + ".");
             }
         }
         Log.d(TAG, "...Creating Socket...");
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try {
             outStream = btSocket.getOutputStream();
         } catch (IOException e) {
-            errorExit("Fatal Error", "In onResume() fallo en la ceracion de outputStream: " + e.getMessage() + ".");
+            errorExit("Fatal Error", "Falló conexión con Light Up " + e.getMessage() + ".");
         }
 
     }
@@ -111,14 +111,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             try{
                 outStream.flush();
             } catch (IOException e) {
-                errorExit("Fatal Error", "In onPause() falló actualizando outStream " + e.getMessage() + ".");
+                errorExit("Fatal Error", "Falló conexión con Light Up" + e.getMessage() + ".");
             }
         }
 
         try{
             btSocket.close();
         } catch (IOException e2) {
-            errorExit("Fatal Error","In onPause() fallo al cerrar el socket." + e2.getMessage() + ".");
+            errorExit("Fatal Error","Falló conexión con Light Up" + e2.getMessage() + ".");
         }
 
 
@@ -140,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(!bandera){
                     //primera vez, esta apagado y pasará a encendido
                     sendData("1");
-                    Toast.makeText(getBaseContext(), "Encender el LED", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getBaseContext(), "Encender el LED", Toast.LENGTH_SHORT).show();
                     bandera=true;
 
                     imgfoco.setImageResource(R.drawable.focoicon);
@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     //esta encendida, se busca apagar
 
                     sendData("0");
-                    Toast.makeText(getBaseContext(), "Apagar el LED", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getBaseContext(), "Apagar el LED", Toast.LENGTH_SHORT).show();
                     bandera = false;
                     imgfoco.setImageResource(R.drawable.focooff);
 
@@ -190,12 +190,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             outStream.write(msgBuffer);
             Log.d(TAG, "se envio con exito: " + message + "...");
         } catch (IOException e) {
-            String msg = "In onResume() ocurrio una excepcion al escribir dato " + e.getMessage();
-            if (address.equals("00:00:00:00:00:00"))
-                msg = msg + ".\n\nfallo direccion del dispositivo esclavo";
-            msg = msg + ".\n\nCheck that the SPP UUID: " + MY_UUID.toString() + "exists on server.\n\n";
+            //String msg = "In onResume() ocurrio una excepcion al escribir dato " + e.getMessage();
+            //if (address.equals("00:00:00:00:00:00"))
+                //msg = msg + ".\n\nfallo direccion del dispositivo esclavo";
+            //msg = msg + ".\n\nCheck that the SPP UUID: " + MY_UUID.toString() + "exists on server.\n\n";
 
-            errorExit("Fatal Error", msg);
+            //errorExit("Fatal Error", msg);
         }
     }
 
@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }else if(intent.getStringExtra("command").equals("removed")){
                 sendData("3");
             }
-            Toast.makeText(getBaseContext(), "llego al onNotice :package = " + pack, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getBaseContext(), "llego al onNotice :package = " + pack, Toast.LENGTH_SHORT).show();
 
         }
     };
