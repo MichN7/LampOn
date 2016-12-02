@@ -2,36 +2,63 @@ package com.greye.lampon;
 
 
 import android.app.Activity;
+
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Build;
+
 import android.os.Bundle;
-import android.telecom.Call;
+
 import android.util.Log;
-import android.webkit.CookieManager;
-import android.webkit.CookieSyncManager;
+import android.view.LayoutInflater;
+import android.view.View;
+
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
+
+
+import com.squareup.picasso.Picasso;
 import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
+
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.*;
 import com.twitter.sdk.android.core.identity.*;
 
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import io.fabric.sdk.android.Fabric;
 
+
+
 public class SocialActivity extends Activity{
+
+    //Extra
+    final Context context = this;
+
 
     //Facebook
     private LoginButton loginButtonFace;
     private CallbackManager callbackManager;
+    TextView details_txt;
+
+    ImageView imageView;
 
     //Twitter
     private static final String TWITTER_KEY = "5jT3g59qDkKNQ2gIWsE51dYDR";
@@ -42,9 +69,12 @@ public class SocialActivity extends Activity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social);
-
+        details_txt = (TextView)findViewById(R.id.nombre);
         setUpTwitterButton();
         setUpFacebookButton();
+        imageView = (ImageView)findViewById(R.id.imageView5);
+
+
 
     }
 
@@ -56,9 +86,34 @@ public class SocialActivity extends Activity{
         loginButtonFace.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                String msg = "Se ha conectado correctamente a Facebook! ";
-                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-                goMainScreen();
+                AccessToken accessToken = loginResult.getAccessToken();
+                GraphRequest request = GraphRequest.newMeRequest(accessToken,
+                        new GraphRequest.GraphJSONObjectCallback(){
+                           public void onCompleted(JSONObject object, GraphResponse response){
+                               try {
+                                   String userID = (String) object.get("id");
+                                   String userName = (String) object.get("name");
+                                   ImageView image = new ImageView(getApplicationContext());
+                                   Picasso.with(SocialActivity.this).load("https://graph.facebook.com/" + userID + "/picture?type=large").into(image);
+                                   AlertDialog dialog = new AlertDialog.Builder(SocialActivity.this)
+                                           .setView(image)
+                                           .setMessage("                   Bienvenido/a \n" + "            "+ userName)
+                                           .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                               @Override
+                                               public void onClick(DialogInterface dialog, int which) {
+                                                   dialog.dismiss();
+                                               }
+                                           }).create();
+                                   dialog.show();
+                               }catch(JSONException e){
+                                   e.printStackTrace();
+                               }
+                           }
+                        });
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "id,name,link,birthday,picture");
+                request.setParameters(parameters);
+                request.executeAsync();
             }
 
             @Override
@@ -72,6 +127,7 @@ public class SocialActivity extends Activity{
             }
         });
     } //Inicializa el boton de Facebook
+
 
     private void setUpTwitterButton(){
         //Twitter
@@ -107,10 +163,10 @@ public class SocialActivity extends Activity{
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode,resultCode,data);
 
-        //Twitter
-        loginButton.onActivityResult(requestCode,resultCode,data);
         //Facebook
         callbackManager.onActivityResult(requestCode,resultCode,data);
 
+        //Twitter
+        loginButton.onActivityResult(requestCode,resultCode,data);
     }
 }
