@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final String TAG = "Bluetooth";
     private static final int REQUEST_ENABLE_BT = 1;
     private BluetoothAdapter btAdapter = null;
-    private BluetoothSocket btSocket = null;
+    private BluetoothSocket btSocket;
     private OutputStream outStream = null;
     private static final UUID MY_UUID =
             UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
@@ -50,6 +50,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("Msg"));
 
@@ -61,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imageView.setOnClickListener(this);
         imageView2.setOnClickListener(this);
         imgfoco.setOnClickListener(this);
-
+        Log.d("bandera"," : "+ bandera2);
 
       //  checkBTState();
 
@@ -70,25 +74,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    public void onResume(){
+    public void onResume() {
 
-            super.onResume();
-        
+        super.onResume();
 
-            if(!ban) {
 
-                    Log.d(TAG, "...In onResume ...");
-                   if(!bandera2) {
-                       btAdapter = BluetoothAdapter.getDefaultAdapter();
-                       checkBTState();
-                       BluetoothDevice device = btAdapter.getRemoteDevice(address);
+            if (!ban) {
 
-                       try {
-                           btSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
-                       } catch (IOException e) {
-                           errorExit("Fatal Error", "Falló conexión con Light Up" + e.getMessage() + ".");
-                       }
-                       btAdapter.cancelDiscovery();
+                Log.d(TAG, "...In onResume ...");
+                if (!bandera2) {
+                    btAdapter = BluetoothAdapter.getDefaultAdapter();
+                    checkBTState();
+                    BluetoothDevice device = btAdapter.getRemoteDevice(address);
+
+                    try {
+                        btSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
+                    } catch (IOException e) {
+                        errorExit("Fatal Error", "Falló conexión con Light Up" + e.getMessage() + ".");
+                    }
+                    btAdapter.cancelDiscovery();
 
                     Log.d(TAG, "...Connecting to Remote...");
                     try {
@@ -110,11 +114,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
 
 
-                   }
-
                 }
-        bandera2=false;
-        ban = false;
+
+            }
+            bandera2 = false;
+            ban = false;
+
 
     }
 
@@ -184,6 +189,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
 
         }
+    public void onDestroy(){
+        super.onDestroy();
+        try {
+            btSocket.close();
+        } catch (IOException e2) {
+
+        }
+    }
 
 
 
