@@ -1,5 +1,6 @@
 package com.greye.lampon;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 
+@TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class NotificationService extends NotificationListenerService {
     Context context;

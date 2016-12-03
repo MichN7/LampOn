@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private static final UUID MY_UUID =
             UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
     private static String address = "98:D3:31:90:8F:3B";
+    boolean ban=false;
+    boolean bandera2=false;
 
 
 
@@ -48,9 +50,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("Msg"));
+
         socialImage = (ImageView) findViewById(R.id.imageView2);
         ImageView imageView = (ImageView) findViewById(R.id.imageView);
         ImageView imageView2 = (ImageView) findViewById(R.id.imageView2);
@@ -60,8 +62,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imageView2.setOnClickListener(this);
         imgfoco.setOnClickListener(this);
 
-        btAdapter = BluetoothAdapter.getDefaultAdapter();
-        checkBTState();
+
+      //  checkBTState();
 
     }
 
@@ -69,60 +71,125 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
     public void onResume(){
-        super.onResume();
-        Log.d(TAG, "...In onResume ...");
-        BluetoothDevice device = btAdapter.getRemoteDevice(address);
-        try {
-            btSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
-        }   catch (IOException e) {
-            errorExit("Fatal Error", "Falló conexión con Light Up" + e.getMessage() + ".");
-        }
-        btAdapter.cancelDiscovery();
 
-        Log.d(TAG, "...Connecting to Remote...");
-        try{
-            btSocket.connect();
-            Log.d(TAG, "...concetando socket..");
-        } catch (IOException e) {
-            try{
-                btSocket.close();
-            } catch (IOException e2) {
-                errorExit("Fatal Error", "Falló conexión con Light Up" + e2.getMessage() + ".");
-            }
-        }
-        Log.d(TAG, "...Creating Socket...");
+            super.onResume();
+        
 
-        try {
-            outStream = btSocket.getOutputStream();
-        } catch (IOException e) {
-            errorExit("Fatal Error", "Falló conexión con Light Up " + e.getMessage() + ".");
-        }
+            if(!ban) {
+
+                    Log.d(TAG, "...In onResume ...");
+                   if(!bandera2) {
+                       btAdapter = BluetoothAdapter.getDefaultAdapter();
+                       checkBTState();
+                       BluetoothDevice device = btAdapter.getRemoteDevice(address);
+
+                       try {
+                           btSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
+                       } catch (IOException e) {
+                           errorExit("Fatal Error", "Falló conexión con Light Up" + e.getMessage() + ".");
+                       }
+                       btAdapter.cancelDiscovery();
+
+                    Log.d(TAG, "...Connecting to Remote...");
+                    try {
+                        btSocket.connect();
+                        Log.d(TAG, "...concetando socket..");
+                    } catch (IOException e) {
+                        try {
+                            btSocket.close();
+                        } catch (IOException e2) {
+                            errorExit("Fatal Error", "Falló conexión con Light Up" + e2.getMessage() + ".");
+                        }
+                    }
+                    Log.d(TAG, "...Creating Socket...");
+
+                    try {
+                        outStream = btSocket.getOutputStream();
+                    } catch (IOException e) {
+                        errorExit("Fatal Error", "Falló conexión con Light Up " + e.getMessage() + ".");
+                    }
+
+
+                   }
+
+                }
+        bandera2=false;
+        ban = false;
 
     }
 
 
     public void onPause()
+
     {
         super.onPause();
 
-        Log.d(TAG, "...In onPause()...");
+            Log.d(TAG, "...In onPause()...");
 
-        if (outStream != null) {
-            try{
-                outStream.flush();
-            } catch (IOException e) {
-                errorExit("Fatal Error", "Falló conexión con Light Up" + e.getMessage() + ".");
+            if (outStream != null) {
+                try {
+                    outStream.flush();
+                } catch (IOException e) {
+                    errorExit("Fatal Error", "Falló conexión con Light Up" + e.getMessage() + ".");
+                }
             }
-        }
 
-        try{
-            btSocket.close();
-        } catch (IOException e2) {
-            errorExit("Fatal Error","Falló conexión con Light Up" + e2.getMessage() + ".");
-        }
+            try {
+                btSocket.close();
+            } catch (IOException e2) {
+                errorExit("Fatal Error", "Falló conexión con Light Up" + e2.getMessage() + ".");
+            }
 
 
     }
+
+    public void onStop(){
+        super.onStop();
+
+
+            if (!ban) {
+                // Log.d(TAG, "...In onResume ...");
+                if (!bandera2) {
+                        BluetoothDevice device = btAdapter.getRemoteDevice(address);
+                        try {
+                            btSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
+                        } catch (IOException e) {
+                            errorExit("Fatal Error", "Falló conexión con Light Up" + e.getMessage() + ".");
+                        }
+                        btAdapter.cancelDiscovery();
+
+                        Log.d(TAG, "...Connecting to Remote...");
+                        try {
+                            btSocket.connect();
+                            Log.d(TAG, "...concetando socket..");
+                        } catch (IOException e) {
+                            try {
+                                btSocket.close();
+                            } catch (IOException e2) {
+                                errorExit("Fatal Error", "Falló conexión con Light Up" + e2.getMessage() + ".");
+                            }
+                        }
+                        Log.d(TAG, "...Creating Socket...");
+
+                        try {
+                            outStream = btSocket.getOutputStream();
+                            Log.d(TAG, "...socket creado");
+                        } catch (IOException e) {
+                            errorExit("Fatal Error", "Falló conexión con Light Up " + e.getMessage() + ".");
+                        }
+
+                    bandera2 = true;
+                }
+                ban=true;
+            }
+
+        }
+
+
+
+
+
+
 
 
     @Override
