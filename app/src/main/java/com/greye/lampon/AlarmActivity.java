@@ -2,6 +2,7 @@ package com.greye.lampon;
 
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -41,8 +42,14 @@ public class AlarmActivity extends ActionBarActivity {
         btnAgregarMiembro.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent iagregar = new Intent(AlarmActivity.this, HourActivity2.class);
-                startActivity(iagregar);
+                // Check if we're running on Android 5.0 or higher
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+                } else {
+                    Intent iagregar = new Intent(AlarmActivity.this, HourActivity2.class);
+                    startActivity(iagregar);
+                }
+
             }
         });
 
