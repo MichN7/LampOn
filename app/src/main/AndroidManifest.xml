@@ -44,16 +44,16 @@
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.greye.lampon.NOTIFICATION_POSTED_RECEIVER"></action>
+                <action android:name="com.greye.lampon.NOTIFICATION_POSTED_RECEIVER" />
             </intent-filter>
         </receiver>
 
-        <activity android:name=".SocialActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".AlarmActivity"
-            android:screenOrientation="portrait"
-            />
+        <activity
+            android:name=".SocialActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AlarmActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
@@ -62,15 +62,14 @@
             android:name="io.fabric.ApiKey"
             android:value="29e582d518f5bbc246d31dfcaf596a5724dc2bd4" />
 
-        <activity android:name=".HourActivity2"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".AplazarActivity"
-            android:screenOrientation="portrait"
-            />
+        <activity
+            android:name=".HourActivity2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AplazarActivity"
+            android:screenOrientation="portrait" />
 
-        <receiver android:name=".Alarm_Receiver"
-            />
+        <receiver android:name=".Alarm_Receiver" />
 
         <service
             android:name=".RingTonePlayingService"
@@ -84,13 +83,14 @@
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
 
-        <activity android:name=".PosponerAcivity"
+        <activity
+            android:name=".PosponerAcivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".MainActivity"
             android:screenOrientation="portrait"
-            />
-        <activity android:name=".MainActivity"
-            android:screenOrientation="portrait"
-
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".VersionesViejas"></activity>
     </application>
 
 </manifest>

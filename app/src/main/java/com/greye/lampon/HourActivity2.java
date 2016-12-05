@@ -72,7 +72,11 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hour2);
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){
+            setContentView(R.layout.activity_versiones_viejas);
+        }else{
+            setContentView(R.layout.activity_hour2);
+        }
         final Calendar cal = Calendar.getInstance();
         this.context = this;
         ban = false;
