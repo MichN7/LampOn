@@ -143,7 +143,7 @@ public class SocialActivity extends Activity{
                     TwitterSession session = result.data;
                     String msg = "Se ha conectado correctamente a Twitter! ";
                     Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
-                    goMainScreen();
+
 
             }
             @Override
@@ -154,10 +154,11 @@ public class SocialActivity extends Activity{
     } //Inicializa el boton de Twitter
 
 
-    protected void goMainScreen(){
+   public void onBackPressed(){
         Intent intent = new Intent(this,MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        finish();
     } //Regresa a la pantalla principal
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data){

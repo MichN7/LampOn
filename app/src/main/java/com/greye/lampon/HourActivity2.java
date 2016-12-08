@@ -20,6 +20,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -114,28 +115,22 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
                     Log.e("dentro del OnClick", "que entro al btG ");
 
                     boolean ban2 = true;
-
                     if (cb1.isChecked()) {
                         if(ban2) {
                             Dias = "Lunes";
                             cal.set(java.util.Calendar.DAY_OF_WEEK, 2);
                             ban2=false;
                             Log.e("String es : ","Lunes es el primero");
-
                         }
                         else {
                             Dias += ", Lunes";
-
                         }
-
-
                     } if (cb2.isChecked()) {
 
                         if(ban2) {
                             Dias = "Martes";
                             cal.set(java.util.Calendar.DAY_OF_WEEK, 3);
                             ban2=false;
-
                         }
                         else {
                             Dias += ", Martes";
@@ -219,9 +214,7 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
                     //se mandan los valores a la DB
                     String titulo = et.getText().toString();
                     dbconeccion.insertarDatos(titulo,hora_string,Dias);
-                    Intent main = new Intent(HourActivity2.this, AlarmActivity.class)
-                            .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(main);
+                   finish();
 
                 }
 
@@ -290,26 +283,5 @@ public class HourActivity2 extends AppCompatActivity implements View.OnClickList
         AppIndex.AppIndexApi.end(client, getIndexApiAction());
         client.disconnect();
     }
-
-    public void setAlarm_sun(int dayOfWeek) {
-        cal.set(Calendar.DAY_OF_WEEK, dayOfWeek);
-        Toast.makeText(getApplicationContext(), "sun "+cal.get(Calendar.DAY_OF_WEEK),Toast.LENGTH_SHORT).show();
-
-        Toast.makeText(getApplicationContext(), "Finsh", Toast.LENGTH_SHORT).show();
-
-        final Intent intent = new Intent(this, Alarm_Receiver.class);
-
-        PendingIntent pendingIntent0 = PendingIntent.getBroadcast(this, 0,
-                intent, 0);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 12345,
-                intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        Long alarmTime = cal.getTimeInMillis();
-
-        // am.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime,7* 24 * 60 * 60 * 1000 , pendingIntent);
-        alarm_Manager.setRepeating(AlarmManager.RTC_WAKEUP, alarmTime,7* 24 * 60 * 60 * 1000 , pendingIntent);
-
-    }
-
 
 }

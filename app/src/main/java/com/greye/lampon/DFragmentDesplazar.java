@@ -31,8 +31,7 @@ public class DFragmentDesplazar extends DialogFragment{
                 false);
         getDialog().setTitle("Minutos");
 
-        alarm_Manager = (AlarmManager)getActivity().getSystemService(ALARM_SERVICE);
-        final Intent mi_intent = new Intent(getActivity(), Alarm_Receiver.class);
+
         radio = (RadioGroup) rootView.findViewById(R.id.RadioGroup);
         Button Desplazar = (Button) rootView.findViewById(R.id.btnGuardarDezplazar);
 
@@ -51,88 +50,25 @@ public class DFragmentDesplazar extends DialogFragment{
 
                 if (checkedId == R.id.Rbtn) {
 
-                    Log.e("Entro a Clase Dfragment","presiono radio button 1");
-
-                    alarm_Manager.cancel(pending_intent);
-                    mi_intent.putExtra("extra", "alarm_off");
-                    getActivity().sendBroadcast(mi_intent);
-
-                    Aplazar = 1;
-                    mi_intent.putExtra("extra", "alarm_on");
-
-                    pending_intent = PendingIntent.getBroadcast(getActivity(), 0, mi_intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                    alarm_Manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + Aplazar * 10000, pending_intent);
-
-                    returnToback();
+                    Posponer(10);
 
                 } else if (checkedId == R.id.Rbtn0) {
-                    alarm_Manager.cancel(pending_intent);
-                    mi_intent.putExtra("extra", "alarm_off");
-                    getActivity().sendBroadcast(mi_intent);
-
-                    Aplazar = 3;
-                    mi_intent.putExtra("extra", "alarm_on");
-
-                    pending_intent = PendingIntent.getBroadcast(getActivity(), 0, mi_intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                    alarm_Manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + Aplazar * 10000, pending_intent);
-                    returnToback();
+                    Posponer(30);
 
 
                 } else if (checkedId == R.id.Rbtn1) {
-                    alarm_Manager.cancel(pending_intent);
-                    mi_intent.putExtra("extra", "alarm_off");
-                    getActivity().sendBroadcast(mi_intent);
-
-                    Aplazar = 5;
-                    mi_intent.putExtra("extra", "alarm_on");
-
-                    pending_intent = PendingIntent.getBroadcast(getActivity(), 0, mi_intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                    alarm_Manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + Aplazar * 10000, pending_intent);
-                    returnToback();
+                    Posponer(50);
 
 
                 } else if (checkedId == R.id.Rbtn2) {
-                    alarm_Manager.cancel(pending_intent);
-                    mi_intent.putExtra("extra", "alarm_off");
-                    getActivity().sendBroadcast(mi_intent);
-
-                    Aplazar = 10;
-                    mi_intent.putExtra("extra", "alarm_on");
-
-                    pending_intent = PendingIntent.getBroadcast(getActivity(), 0, mi_intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                    alarm_Manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + Aplazar * 10000, pending_intent);
-
-                    returnToback();
+                    Posponer(100);
 
                 } else if (checkedId == R.id.Rbtn3) {
-                    alarm_Manager.cancel(pending_intent);
-                    mi_intent.putExtra("extra", "alarm_off");
-                    getActivity().sendBroadcast(mi_intent);
-
-                    Aplazar = 15;
-                    mi_intent.putExtra("extra", "alarm_on");
-
-                    pending_intent = PendingIntent.getBroadcast(getActivity(), 0, mi_intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                    alarm_Manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + Aplazar * 10000, pending_intent);
-                    returnToback();
+                    Posponer(150);
 
 
                 } else if (checkedId == R.id.Rbtn4) {
-                    alarm_Manager.cancel(pending_intent);
-                    mi_intent.putExtra("extra", "alarm_off");
-                    getActivity().sendBroadcast(mi_intent);
-
-                    Aplazar = 30;
-                    mi_intent.putExtra("extra", "alarm_on");
-
-                    pending_intent = PendingIntent.getBroadcast(getActivity(), 0, mi_intent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-                    alarm_Manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + Aplazar * 10000, pending_intent);
-                    returnToback();
+                  Posponer(300);
 
 
                 }
@@ -156,6 +92,24 @@ public class DFragmentDesplazar extends DialogFragment{
 
         Intent intent = new Intent(getActivity(), PosponerAcivity.class);
         startActivity(intent);
+    }
+    public void Posponer(int min){
+
+        alarm_Manager = (AlarmManager)getActivity().getSystemService(ALARM_SERVICE);
+        final Intent mi_intent = new Intent(getActivity(), Alarm_Receiver.class);
+
+        alarm_Manager.cancel(pending_intent);
+        mi_intent.putExtra("extra", "alarm_off");
+        getActivity().sendBroadcast(mi_intent);
+
+        Aplazar = min;
+        mi_intent.putExtra("extra", "alarm_on");
+
+        pending_intent = PendingIntent.getBroadcast(getActivity(), 0, mi_intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        alarm_Manager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + Aplazar * 10000, pending_intent);
+        returnToback();
+
     }
 
 }

@@ -107,8 +107,12 @@ public class AlarmActivity extends ActionBarActivity {
 
         });
     }
+    public void onBackPressed() {
+        Intent i = new Intent(AlarmActivity.this, MainActivity.class);
+        startActivity(i);
+        finish();
+    }
 
 
-
-} //
+}
 

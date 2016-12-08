@@ -67,19 +67,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         imgfoco.setOnClickListener(this);
         Log.d("bandera"," : "+ bandera2);
 
-      //  checkBTState();
-
     }
-
-
-
-
     public void onResume() {
 
         super.onResume();
-
-
-            if (!ban) {
+         if (!ban) {
 
                 Log.d(TAG, "...In onResume ...");
                 if (!bandera2) {
@@ -112,17 +104,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     } catch (IOException e) {
                         errorExit("Fatal Error", "Falló conexión con Light Up " + e.getMessage() + ".");
                     }
-
-
                 }
 
             }
             bandera2 = false;
             ban = false;
-
-
     }
-
 
     public void onPause()
 
@@ -144,8 +131,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             } catch (IOException e2) {
                 errorExit("Fatal Error", "Falló conexión con Light Up" + e2.getMessage() + ".");
             }
-
-
     }
 
     public void onStop(){
@@ -197,13 +182,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         }
     }
-
-
-
-
-
-
-
 
     @Override
     public void onClick(View v) {

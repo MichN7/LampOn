@@ -19,7 +19,8 @@
         android:id="@+id/listViewMiembros"
         android:layout_width="match_parent"
         android:layout_height="361dp"
-        android:dividerHeight="2dp" >
+        android:dividerHeight="2dp"
+        android:layout_weight="0.65">
     </ListView>
 
 
