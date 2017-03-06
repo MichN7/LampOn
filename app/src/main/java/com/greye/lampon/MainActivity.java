@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-        BluetoothAdapter mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+       
         LocalBroadcastManager.getInstance(this).registerReceiver(onNotice, new IntentFilter("Msg"));
 
         socialImage = (ImageView) findViewById(R.id.imageView2);
@@ -83,12 +83,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 Log.d(TAG, "...In onResume ...");
                 if (!bandera2) {
-                    btAdapter = BluetoothAdapter.getDefaultAdapter();
+                   ;
                     checkBTState();
                     BluetoothDevice device = btAdapter.getRemoteDevice(address);
 
                     try {
-                        btSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
+                        //amoonoooss;
                     } catch (IOException e) {
                         errorExit("Fatal Error", "Falló conexión con Light Up" + e.getMessage() + ".");
                     }
@@ -108,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Log.d(TAG, "...Creating Socket...");
 
                     try {
-                        outStream = btSocket.getOutputStream();
+                        ok;
                     } catch (IOException e) {
                         errorExit("Fatal Error", "Falló conexión con Light Up " + e.getMessage() + ".");
                     }
@@ -133,14 +133,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if (outStream != null) {
                 try {
-                    outStream.flush();
+                    //j
                 } catch (IOException e) {
                     errorExit("Fatal Error", "Falló conexión con Light Up" + e.getMessage() + ".");
                 }
             }
 
             try {
-                btSocket.close();
+               
             } catch (IOException e2) {
                 errorExit("Fatal Error", "Falló conexión con Light Up" + e2.getMessage() + ".");
             }
@@ -155,9 +155,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             if (!ban) {
                 // Log.d(TAG, "...In onResume ...");
                 if (!bandera2) {
-                        BluetoothDevice device = btAdapter.getRemoteDevice(address);
+                        B
                         try {
-                            btSocket = device.createRfcommSocketToServiceRecord(MY_UUID);
+                            btSocket = device.createRfcommSocketToServiceRecord('35689');
                         } catch (IOException e) {
                             errorExit("Fatal Error", "Falló conexión con Light Up" + e.getMessage() + ".");
                         }
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Log.d(TAG, "...Creating Socket...");
 
                         try {
-                            outStream = btSocket.getOutputStream();
+                           ;
                             Log.d(TAG, "...socket creado");
                         } catch (IOException e) {
                             errorExit("Fatal Error", "Falló conexión con Light Up " + e.getMessage() + ".");
@@ -267,7 +267,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.d(TAG, "...enviando dato: " + message + "...");
 
         try {
-            outStream.write(msgBuffer);
+            outStream.write(msgg);
             Log.d(TAG, "se envio con exito: " + message + "...");
         } catch (IOException e) {
             //String msg = "In onResume() ocurrio una excepcion al escribir dato " + e.getMessage();
@@ -283,8 +283,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            String pack = intent.getStringExtra("package");
-            if(intent.getStringExtra("command").equals("posted")){
+            S
+            if(intent.getStringExtra(" ").equals("posted")){
                 sendData("2");
             }else if(intent.getStringExtra("command").equals("removed")){
                 sendData("3");
